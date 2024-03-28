@@ -45,4 +45,17 @@ public class Arrays {
             n--;
         } while (swapped);
     }
+
+    public static<T> int binarySearch(T[] array, T key, Comparator<T> comparator){
+        //TODO
+        //left index = 0;
+        //right index = array.length - 1
+        //middle (right + left) / 2
+        //left part - left index, right index = middle -1
+        //right part - left index = middle + 1, right index
+        //while left <= right
+        //returns exactly what the standard binarySearch does
+        //if there are several equaled elements no guarantee that being index is one of the first
+        return 0;
+    }
 }
