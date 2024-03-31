@@ -1,6 +1,7 @@
 package telran.util;
 
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class Arrays {
     public static <T> int indexOf(T[] array, T element) {
@@ -46,16 +47,47 @@ public class Arrays {
         } while (swapped);
     }
 
-    public static<T> int binarySearch(T[] array, T key, Comparator<T> comparator){
+    public static <T> int binarySearch(T[] array, T key, Comparator<T> comp) {
         //TODO
-        //left index = 0;
-        //right index = array.length - 1
-        //middle (right + left) / 2
-        //left part - left index, right index = middle -1
-        //right part - left index = middle + 1, right index
-        //while left <= right
-        //returns exactly what the standard binarySearch does
-        //if there are several equaled elements no guarantee that being index is one of the first
-        return 0;
+        int leftIndex = 0;
+        int rightIndex = array.length - 1;
+        int res = -1;
+        boolean indexNotFound = true;
+        while (leftIndex <= rightIndex && indexNotFound) {
+            int middleIndex = (leftIndex + rightIndex) >>> 1;
+            int comparing = comp.compare(array[middleIndex], key);
+            if (comparing == 0) {
+                res = middleIndex;
+                indexNotFound = false;
+            } else if (comparing > 0) {
+                rightIndex = middleIndex - 1;
+            } else {
+                leftIndex = middleIndex + 1;
+            }
+
+        }
+        if (indexNotFound){
+            res = -(leftIndex + 1);
+        }
+        return res;
+    }
+
+    public static <T> T[] search(T[] array, Predicate<T> predicate) {
+        //Impossible to allocate memory for generic array
+        //Only Arrays.copyOf may be used
+        T[] arResult = java.util.Arrays.copyOf(array, array.length);
+        int index = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (predicate.test(array[i])) {
+                arResult[index++] = array[i];
+            }
+        }
+        return java.util.Arrays.copyOf(arResult, index);
+    }
+
+    public static <T> T[] removeIf(T[] array, Predicate<T> predicate) {
+        //TODO
+        //removes all elements of array matching a given predicate
+        return null;
     }
 }
