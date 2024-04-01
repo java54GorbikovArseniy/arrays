@@ -86,8 +86,17 @@ public class Arrays {
     }
 
     public static <T> T[] removeIf(T[] array, Predicate<T> predicate) {
-        //TODO
-        //removes all elements of array matching a given predicate
-        return null;
+        /* implementation of the method, without repeating code */
+        return search(array, a -> !predicate.test(a));
+
+        /* --------- Duplicate method search() with invert condition --------- */
+//        T[] arResult = java.util.Arrays.copyOf(array, array.length);
+//        int index = 0;
+//        for (int i = 0; i < array.length; i++) {
+//            if (!predicate.test(array[i])) {
+//                arResult[index++] = array[i];
+//            }
+//        }
+//        return java.util.Arrays.copyOf(arResult, index);
     }
 }

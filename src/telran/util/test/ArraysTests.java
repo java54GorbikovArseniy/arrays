@@ -79,6 +79,10 @@ class ArraysTests {
     }
     @Test
     void removeIfTest() {
-        //TODO
+        Integer[] originalArray = {111, 222, 333, 444, 555, 777, 888, 9999};
+        Integer[] expectedArrayWithoutOddNumbers = {222, 444, 888};
+        Integer[] expectedArrayWithoutEvenNumbers = {111,333,555,777,9999};
+        assertArrayEquals(expectedArrayWithoutEvenNumbers, Arrays.removeIf(originalArray, a -> a %2 ==0));
+        assertArrayEquals(expectedArrayWithoutOddNumbers, Arrays.removeIf(originalArray, a -> a %2 !=0));
     }
 }
